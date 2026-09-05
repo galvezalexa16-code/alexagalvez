@@ -1,0 +1,194 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// ENUMS
+// ============================================
+
+enum Role {
+  OWNER
+  ADMIN
+  SUPERVISOR
+}
+
+enum UserStatus {
+  ACTIVE
+  ARCHIVED
+}
+
+enum StockStatus {
+  GOOD
+  LOW
+  OUT_OF_STOCK
+}
+
+enum OrderType {
+  DINE_IN
+  TAKE_OUT
+}
+
+enum OrderStatus {
+  PENDING
+  PREPARING
+  READY
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  CASH
+  CARD
+  QRPH
+}
+
+enum PaymentStatus {
+  PAID
+  REFUNDED
+}
+
+// ============================================
+// MODELS
+// ============================================
+
+model User {
+  id         Int        @id @default(autoincrement())
+  name       String
+  email      String     @unique
+  password   String
+  role       Role
+  status     UserStatus @default(ACTIVE)
+  lastActive DateTime?
+  createdAt  DateTime   @default(now())
+
+  updatedInventory InventoryItem[]
+  transactions     Transaction[]
+  expenses         Expense[]
+}
+
+model MenuCategory {
+  id    Int        @id @default(autoincrement())
+  name  String
+  slug  String     @unique
+  items MenuItem[]
+}
+
+model MenuItem {
+  id         Int          @id @default(autoincrement())
+  categoryId Int
+  category   MenuCategory @relation(fields: [categoryId], references: [id])
+  name       String
+  price      Decimal      @db.Decimal(10, 2)
+  imageUrl   String
+  isArchived Boolean      @default(false)
+  createdAt  DateTime     @default(now())
+
+  variations  MenuItemVariation[]
+  ingredients MenuItemIngredient[]
+  orderItems  OrderItem[]
+}
+
+model MenuItemVariation {
+  id         Int      @id @default(autoincrement())
+  menuItemId Int
+  menuItem   MenuItem @relation(fields: [menuItemId], references: [id])
+  name       String
+  priceMod   Decimal  @default(0) @db.Decimal(10, 2)
+
+  orderItems OrderItem[]
+}
+
+model InventoryCategory {
+  id    Int             @id @default(autoincrement())
+  name  String
+  items InventoryItem[]
+}
+
+model InventoryItem {
+  id            Int               @id @default(autoincrement())
+  categoryId    Int
+  category      InventoryCategory @relation(fields: [categoryId], references: [id])
+  name          String
+  stockQuantity Decimal           @db.Decimal(10, 3)
+  unit          String
+  supplier      String
+  expiryDate    DateTime?
+  status        StockStatus       @default(GOOD)
+  updatedById   Int
+  updatedBy     User              @relation(fields: [updatedById], references: [id])
+  updatedAt     DateTime          @updatedAt
+
+  menuIngredients MenuItemIngredient[]
+}
+
+model MenuItemIngredient {
+  id             Int           @id @default(autoincrement())
+  menuItemId     Int
+  menuItem       MenuItem      @relation(fields: [menuItemId], references: [id])
+  ingredientId   Int
+  ingredient     InventoryItem @relation(fields: [ingredientId], references: [id])
+  quantityNeeded Decimal       @db.Decimal(10, 3)
+  unit           String
+}
+
+model RestaurantTable {
+  id     Int     @id @default(autoincrement())
+  name   String
+  qrCode String  @unique
+  orders Order[]
+}
+
+model Order {
+  id          Int              @id @default(autoincrement())
+  tableId     Int?
+  table       RestaurantTable? @relation(fields: [tableId], references: [id])
+  orderType   OrderType
+  status      OrderStatus      @default(PENDING)
+  totalAmount Decimal          @db.Decimal(10, 2)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  items       OrderItem[]
+  transaction Transaction?
+}
+
+model OrderItem {
+  id          Int                @id @default(autoincrement())
+  orderId     Int
+  order       Order              @relation(fields: [orderId], references: [id])
+  menuItemId  Int
+  menuItem    MenuItem           @relation(fields: [menuItemId], references: [id])
+  variationId Int?
+  variation   MenuItemVariation? @relation(fields: [variationId], references: [id])
+  quantity    Int
+  unitPrice   Decimal            @db.Decimal(10, 2)
+}
+
+model Transaction {
+  id            Int           @id @default(autoincrement())
+  orderId       Int           @unique
+  order         Order         @relation(fields: [orderId], references: [id])
+  staffId       Int
+  staff         User          @relation(fields: [staffId], references: [id])
+  amountPaid    Decimal       @db.Decimal(10, 2)
+  paymentMethod PaymentMethod
+  status        PaymentStatus @default(PAID)
+  createdAt     DateTime      @default(now())
+}
+
+model Expense {
+  id           Int      @id @default(autoincrement())
+  description  String
+  amount       Decimal  @db.Decimal(10, 2)
+  recordedById Int
+  recordedBy   User     @relation(fields: [recordedById], references: [id])
+  createdAt    DateTime @default(now())
+}
