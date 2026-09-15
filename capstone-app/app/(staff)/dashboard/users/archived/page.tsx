@@ -19,8 +19,8 @@ interface MockUser {
 }
 
 const MOCK_ARCHIVED_USERS: MockUser[] = [
-  { id: 6, name: "Roberto Garcia",  email: "roberto@ericahticos.com",  role: "ADMIN",      status: "ARCHIVED", lastActive: "2026-08-20T14:00:00" },
-  { id: 7, name: "Precy Villanueva",email: "precy@ericahticos.com",    role: "SUPERVISOR", status: "ARCHIVED", lastActive: "2026-07-15T09:00:00" },
+  { id: 6, name: "Roberto Garcia",  email: "roberto@ericahlicious.com",  role: "ADMIN",      status: "ARCHIVED", lastActive: "2026-08-20T14:00:00" },
+  { id: 7, name: "Precy Villanueva",email: "precy@ericahlicious.com",    role: "SUPERVISOR", status: "ARCHIVED", lastActive: "2026-07-15T09:00:00" },
 ];
 
 export default async function ArchivedUsersPage() {

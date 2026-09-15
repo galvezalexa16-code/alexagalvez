@@ -21,7 +21,7 @@ const ROLES: RoleOption[] = [
     description: "Full system access",
     color: "bg-amber-500",
     icon: "👑",
-    email: "owner@ericahticos.com",
+    email: "owner@ericahlicious.com",
   },
   {
     key: "ADMIN",
@@ -29,7 +29,7 @@ const ROLES: RoleOption[] = [
     description: "Menu, users & reports",
     color: "bg-purple-500",
     icon: "🛡️",
-    email: "admin@ericahticos.com",
+    email: "admin@ericahlicious.com",
   },
   {
     key: "SUPERVISOR",
@@ -37,7 +37,7 @@ const ROLES: RoleOption[] = [
     description: "Menu, inventory & orders",
     color: "bg-blue-500",
     icon: "📋",
-    email: "supervisor@ericahticos.com",
+    email: "supervisor@ericahlicious.com",
   },
 ];
 
@@ -92,7 +92,7 @@ export default function LoginPage() {
           <div className="w-16 h-16 rounded-2xl bg-amber-500 flex items-center justify-center text-slate-900 font-bold text-2xl mx-auto mb-4 shadow-lg">
             E
           </div>
-          <h1 className="text-white text-2xl font-bold">Ericahticos Cafe</h1>
+          <h1 className="text-white text-2xl font-bold">Ericahlicious Cafe</h1>
           <p className="text-slate-400 text-sm mt-1">Staff Management Portal</p>
         </div>
 
@@ -136,7 +136,7 @@ export default function LoginPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@ericahticos.com"
+                placeholder="you@ericahlicious.com"
                 required
                 className="w-full px-4 py-2.5 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-colors text-sm"
               />
@@ -169,9 +169,9 @@ export default function LoginPage() {
           {/* Demo hint — credentials match lib/demo-users.ts exactly */}
           <div className="mt-4 p-3 bg-slate-700/50 rounded-lg border border-slate-600">
             <p className="text-slate-400 text-xs font-medium mb-1">Demo credentials (password: password123):</p>
-            <p className="text-slate-300 text-xs">owner@ericahticos.com</p>
-            <p className="text-slate-300 text-xs">admin@ericahticos.com</p>
-            <p className="text-slate-300 text-xs">supervisor@ericahticos.com</p>
+            <p className="text-slate-300 text-xs">owner@ericahlicious.com</p>
+            <p className="text-slate-300 text-xs">admin@ericahlicious.com</p>
+            <p className="text-slate-300 text-xs">supervisor@ericahlicious.com</p>
           </div>
         </div>
       </div>

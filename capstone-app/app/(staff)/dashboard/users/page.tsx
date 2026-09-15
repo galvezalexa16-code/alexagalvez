@@ -19,11 +19,11 @@ interface MockUser {
 }
 
 const MOCK_USERS: MockUser[] = [
-  { id: 1, name: "Maria Santos",    email: "owner@ericahticos.com",      role: "OWNER",      status: "ACTIVE",   lastActive: "2026-09-13T10:00:00" },
-  { id: 2, name: "Juan dela Cruz",  email: "admin@ericahticos.com",      role: "ADMIN",      status: "ACTIVE",   lastActive: "2026-09-13T09:45:00" },
-  { id: 3, name: "Ana Reyes",       email: "supervisor@ericahticos.com", role: "SUPERVISOR", status: "ACTIVE",   lastActive: "2026-09-13T10:20:00" },
-  { id: 4, name: "Carlo Mendoza",   email: "carlo@ericahticos.com",      role: "ADMIN",      status: "ACTIVE",   lastActive: "2026-09-12T15:30:00" },
-  { id: 5, name: "Liza Bautista",   email: "liza@ericahticos.com",       role: "SUPERVISOR", status: "ACTIVE",   lastActive: "2026-09-11T08:00:00" },
+  { id: 1, name: "Maria Santos",    email: "owner@ericahlicious.com",      role: "OWNER",      status: "ACTIVE",   lastActive: "2026-09-13T10:00:00" },
+  { id: 2, name: "Juan dela Cruz",  email: "admin@ericahlicious.com",      role: "ADMIN",      status: "ACTIVE",   lastActive: "2026-09-13T09:45:00" },
+  { id: 3, name: "Ana Reyes",       email: "supervisor@ericahlicious.com", role: "SUPERVISOR", status: "ACTIVE",   lastActive: "2026-09-13T10:20:00" },
+  { id: 4, name: "Carlo Mendoza",   email: "carlo@ericahlicious.com",      role: "ADMIN",      status: "ACTIVE",   lastActive: "2026-09-12T15:30:00" },
+  { id: 5, name: "Liza Bautista",   email: "liza@ericahlicious.com",       role: "SUPERVISOR", status: "ACTIVE",   lastActive: "2026-09-11T08:00:00" },
 ];
 
 export default async function UsersPage() {

@@ -6,7 +6,7 @@ import { Toaster } from "sonner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Ericahticos Cafe | POS & Management",
+  title: "Ericahlicious Cafe | POS & Management",
   description: "Cafe management system for orders, menu, inventory, and reports.",
 };
 

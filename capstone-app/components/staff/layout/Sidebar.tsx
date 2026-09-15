@@ -46,7 +46,7 @@ export function Sidebar({ role, userName }: SidebarProps) {
             E
           </div>
           <div>
-            <p className="text-white font-semibold text-sm leading-tight">Ericahticos</p>
+            <p className="text-white font-semibold text-sm leading-tight">Ericahlicious</p>
             <p className="text-slate-400 text-xs">Cafe & Restaurant</p>
           </div>
         </div>
@@ -91,7 +91,7 @@ export function Sidebar({ role, userName }: SidebarProps) {
       {/* Logout */}
       <div className="px-3 py-4 border-t border-slate-700">
         <button
-          onClick={() => signOut({ callbackUrl: "/login" })}
+          onClick={() => signOut({ callbackUrl: window.location.origin + "/login" })}
           className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-400 hover:bg-slate-700 hover:text-white transition-all duration-150"
         >
           <LogOut size={17} />
