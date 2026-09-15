@@ -1,7 +1,11 @@
-import type { NextConfig } from "next";
+﻿import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  env: {
+    DATABASE_URL:
+      process.env.DATABASE_URL ??
+      'mysql://build:placeholder@localhost:3306/placeholder',
+  },
 };
 
 export default nextConfig;

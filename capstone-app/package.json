@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
@@ -16,6 +17,7 @@
     "lucide-react": "latest",
     "next": "16.3.4",
     "next-auth": "^4.24.7",
+    "postinstall-postinstall": "^2.1.0",
     "prisma": "^5.22.0",
     "qrcode": "latest",
     "react": "19.2.8",
