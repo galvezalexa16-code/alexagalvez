@@ -49,6 +49,13 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
+    async redirect({ url, baseUrl }) {
+      // Force NextAuth to trust the provided callback URL (avoids localhost:3000 redirects on Vercel)
+      if (url.startsWith("/")) {
+        return process.env.NODE_ENV === "development" ? `http://localhost:3000${url}` : `https://ericahlicious.vercel.app${url}`;
+      }
+      return url;
+    },
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
