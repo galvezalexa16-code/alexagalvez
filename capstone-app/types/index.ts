@@ -30,6 +30,7 @@ export const NAV_ITEMS: NavItem[] = [
   { label: "Inventory", href: "/dashboard/inventory", icon: "Package", roles: ["OWNER", "SUPERVISOR"] },
   { label: "Transactions", href: "/dashboard/transactions", icon: "Receipt", roles: ["OWNER", "SUPERVISOR"] },
   { label: "Reports", href: "/dashboard/reports", icon: "BarChart3", roles: ["OWNER", "ADMIN", "SUPERVISOR"] },
+  { label: "Menu Availability", href: "/dashboard/menu-availability", icon: "ListChecks", roles: ["OWNER", "SUPERVISOR"] },
 ];
 
 export const ROLE_COLORS: Record<Role, string> = {

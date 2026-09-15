@@ -11,6 +11,7 @@ import {
   Package,
   Receipt,
   BarChart3,
+  ListChecks,
   LogOut,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -25,6 +26,7 @@ const ICON_MAP = {
   Package,
   Receipt,
   BarChart3,
+  ListChecks,
 };
 
 interface SidebarProps {
