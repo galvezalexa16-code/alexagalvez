@@ -1,7 +1,7 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
-import { findDemoUserByEmail } from "@/lib/demo-users";
+import { db } from "@/lib/db";
 import type { Role } from "@/types";
 
 export const authOptions: NextAuthOptions = {
@@ -18,41 +18,45 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
-        const user = findDemoUserByEmail(credentials.email);
+        const user = await db.user.findUnique({
+          where: { email: credentials.email.toLowerCase() },
+        });
 
-        if (!user) {
+        if (!user || user.status === "ARCHIVED") {
           return null;
         }
 
-        const isValid = await bcrypt.compare(
-          credentials.password,
-          user.passwordHash
-        );
-
+        const isValid = await bcrypt.compare(credentials.password, user.password);
         if (!isValid) {
           return null;
         }
 
-        // Enforce that the role selected on the login screen matches the user's actual role.
-        // If the caller passed a role, it must match exactly.
+        // Enforce role match if caller supplied one
         if (credentials.role && credentials.role !== user.role) {
           return null;
         }
 
+        // Update lastActive timestamp
+        await db.user.update({
+          where: { id: user.id },
+          data: { lastActive: new Date() },
+        });
+
         return {
-          id: user.id,
+          id: String(user.id),
           name: user.name,
           email: user.email,
-          role: user.role,
+          role: user.role as Role,
         };
       },
     }),
   ],
   callbacks: {
-    async redirect({ url, baseUrl }) {
-      // Force NextAuth to trust the provided callback URL (avoids localhost:3000 redirects on Vercel)
+    async redirect({ url }) {
       if (url.startsWith("/")) {
-        return process.env.NODE_ENV === "development" ? `http://localhost:3000${url}` : `https://ericahlicious.vercel.app${url}`;
+        return process.env.NODE_ENV === "development"
+          ? `http://localhost:3000${url}`
+          : `https://ericahlicious.vercel.app${url}`;
       }
       return url;
     },

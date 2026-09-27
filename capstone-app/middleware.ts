@@ -28,10 +28,10 @@ export default withAuth(
         const { pathname } = req.nextUrl;
 
         // Public routes — always allowed
-        const publicRoutes = ["/login", "/menu", "/cart", "/qr", "/order"];
-        const publicApiRoutes = ["/api/auth", "/api/menu", "/api/tables", "/api/orders"];
+        const publicRoutes = ["/login", "/home", "/store", "/menu", "/cart", "/qr", "/order"];
+        const publicApiRoutes = ["/api/auth", "/api/menu", "/api/tables", "/api/orders", "/api/uploadthing", "/api/transactions"];
 
-        const isPublicPage = publicRoutes.some((r) => pathname.startsWith(r));
+        const isPublicPage = pathname === "/" || publicRoutes.some((r) => pathname.startsWith(r));
         const isPublicApi = publicApiRoutes.some((r) => pathname.startsWith(r));
 
         if (isPublicPage || isPublicApi) {

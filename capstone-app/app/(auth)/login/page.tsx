@@ -21,7 +21,7 @@ const ROLES: RoleOption[] = [
     description: "Full system access",
     color: "bg-amber-500",
     icon: "👑",
-    email: "owner@ericahlicious.com",
+    email: "owner@cafe.com",
   },
   {
     key: "ADMIN",
@@ -29,7 +29,7 @@ const ROLES: RoleOption[] = [
     description: "Menu, users & reports",
     color: "bg-purple-500",
     icon: "🛡️",
-    email: "admin@ericahlicious.com",
+    email: "admin@cafe.com",
   },
   {
     key: "SUPERVISOR",
@@ -37,7 +37,7 @@ const ROLES: RoleOption[] = [
     description: "Menu, inventory & orders",
     color: "bg-blue-500",
     icon: "📋",
-    email: "supervisor@ericahlicious.com",
+    email: "supervisor@cafe.com",
   },
 ];
 
@@ -166,12 +166,15 @@ export default function LoginPage() {
             </button>
           </form>
 
-          {/* Demo hint — credentials match lib/demo-users.ts exactly */}
+          {/* Demo hint */}
           <div className="mt-4 p-3 bg-slate-700/50 rounded-lg border border-slate-600">
             <p className="text-slate-400 text-xs font-medium mb-1">Demo credentials (password: password123):</p>
-            <p className="text-slate-300 text-xs">owner@ericahlicious.com</p>
-            <p className="text-slate-300 text-xs">admin@ericahlicious.com</p>
-            <p className="text-slate-300 text-xs">supervisor@ericahlicious.com</p>
+            <p className="text-slate-300 text-xs">owner@cafe.com</p>
+            <p className="text-slate-300 text-xs">admin@cafe.com</p>
+            <p className="text-slate-300 text-xs">supervisor@cafe.com</p>
+          </div>
+          <div className="mt-3 text-center">
+            <a href="/home" className="text-amber-400 hover:text-amber-300 text-xs transition-colors">← Back to Homepage</a>
           </div>
         </div>
       </div>
